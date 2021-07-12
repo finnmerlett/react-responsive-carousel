@@ -39,7 +39,8 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         onChange: noop,
         onSwipeStart: () => {},
         onSwipeEnd: () => {},
-        onSwipeMove: () => false,
+        onSwipeMove: () => {},
+        onSwiped: () => {},
         preventMovementUntilSwipeScrollTolerance: false,
         renderArrowPrev: (onClickHandler: () => void, hasPrev: boolean, label: string) => (
             <button type="button" aria-label={label} className={klass.ARROW_PREV(!hasPrev)} onClick={onClickHandler} />
@@ -454,8 +455,11 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         }
     };
 
-    onSwipeMove = (delta: { x: number; y: number }, event: React.TouchEvent) => {
-        this.props.onSwipeMove(event);
+    onSwipeMove = (delta: { x: number; y: number }, event: React.TouchEvent | React.MouseEvent) => {
+        const propFuncRtnValue = this.props.onSwipeMove(event, delta);
+        if (propFuncRtnValue === false) {
+            return false;
+        }
 
         const animationHandlerResponse = this.props.swipeAnimationHandler(
             delta,
@@ -532,6 +536,9 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
     };
 
     onSwipeForward = () => {
+        const allowSwipe = this.props.onSwiped('forward');
+        if (allowSwipe === false) return;
+
         this.increment(1);
 
         if (this.props.emulateTouch) {
@@ -540,6 +547,9 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
     };
 
     onSwipeBackwards = () => {
+        const allowSwipe = this.props.onSwiped('backwards');
+        if (allowSwipe === false) return;
+
         this.decrement(1);
 
         if (this.props.emulateTouch) {
@@ -608,6 +618,33 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
 
         return null;
     };
+
+    getAdditionalSliderStyle(): React.CSSProperties {
+        if (
+            !this.props.centerModeEndSpacing ||
+            !this.props.centerMode ||
+            this.props.infiniteLoop ||
+            this.props.axis === 'vertical'
+        ) {
+            return {};
+        }
+        const lastPosition = Children.count(this.props.children) - 1;
+
+        let sideStyle: React.CSSProperties = {};
+        const sideSize = (100 - this.props.centerSlidePercentage) / 2;
+
+        if (this.props.selectedItem === 0) {
+            sideStyle = { left: `${sideSize}%`, right: `-${sideSize}%` };
+        }
+        if (this.props.selectedItem === lastPosition) {
+            sideStyle = { right: `${sideSize}%`, left: `-${sideSize}%` };
+        }
+        return {
+            left: '0%',
+            right: '0%',
+            ...sideStyle,
+        };
+    }
 
     renderItems(isClone?: boolean) {
         if (!this.props.children) {
@@ -720,12 +757,14 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         const firstClone = itemsClone.shift();
         const lastClone = itemsClone.pop();
 
+        const itemListStyle = { ...this.state.itemListStyle, ...this.getAdditionalSliderStyle() };
+
         let swiperProps: ReactEasySwipeProps = {
             className: klass.SLIDER(true, this.state.swiping),
             onSwipeMove: this.onSwipeMove,
             onSwipeStart: this.onSwipeStart,
             onSwipeEnd: this.onSwipeEnd,
-            style: this.state.itemListStyle,
+            style: itemListStyle,
             tolerance: this.props.swipeScrollTolerance,
         };
 
@@ -773,7 +812,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                             <ul
                                 className={klass.SLIDER(true, this.state.swiping)}
                                 ref={(node: HTMLUListElement) => this.setListRef(node)}
-                                style={this.state.itemListStyle || {}}
+                                style={itemListStyle || {}}
                             >
                                 {this.props.infiniteLoop && lastClone}
                                 {this.renderItems()}

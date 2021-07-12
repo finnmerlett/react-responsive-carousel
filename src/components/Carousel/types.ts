@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface AnimationHandlerResponse {
     itemListStyle?: React.CSSProperties;
     slideStyle?: React.CSSProperties;
@@ -24,6 +26,7 @@ export interface CarouselProps {
     autoFocus?: boolean;
     autoPlay?: boolean;
     centerMode?: boolean;
+    centerModeEndSpacing?: boolean;
     centerSlidePercentage: number;
     children?: React.ReactChild[];
     className?: string;
@@ -41,7 +44,14 @@ export interface CarouselProps {
     onChange: (index: number, item: React.ReactNode) => void;
     onSwipeStart: (event: React.TouchEvent) => void;
     onSwipeEnd: (event: React.TouchEvent) => void;
-    onSwipeMove: (event: React.TouchEvent) => boolean;
+    onSwipeMove: (
+        event: React.TouchEvent | React.MouseEvent,
+        delta: {
+            x: number;
+            y: number;
+        }
+    ) => boolean | void;
+    onSwiped: (direction: 'forward' | 'backwards') => boolean | void;
     preventMovementUntilSwipeScrollTolerance: boolean;
     renderArrowPrev: (clickHandler: () => void, hasPrev: boolean, label: string) => React.ReactNode;
     renderArrowNext: (clickHandler: () => void, hasNext: boolean, label: string) => React.ReactNode;
