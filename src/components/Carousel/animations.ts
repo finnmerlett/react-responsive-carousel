@@ -78,7 +78,7 @@ export const slideSwipeAnimationHandler: SwipeAnimationHandler = (
     const isHorizontal = props.axis === 'horizontal';
     const childrenLength = Children.count(props.children);
 
-    const initialBoundry = 0;
+    const initialBoundary = 0;
 
     const currentPosition = getPosition(state.selectedItem, props);
     const finalBoundry = props.infiniteLoop
@@ -89,7 +89,7 @@ export const slideSwipeAnimationHandler: SwipeAnimationHandler = (
     let handledDelta = axisDelta;
 
     // prevent user from swiping left out of boundaries
-    if (currentPosition === initialBoundry && axisDelta > 0) {
+    if (currentPosition === initialBoundary && axisDelta > 0) {
         handledDelta = 0;
     }
 
@@ -129,7 +129,7 @@ export const slideSwipeAnimationHandler: SwipeAnimationHandler = (
 };
 
 /**
- * Default 'sliding' style animination handler for when a swipe action stops.
+ * Default 'sliding' style animation handler for when a swipe action stops.
  * @param props
  * @param state
  */

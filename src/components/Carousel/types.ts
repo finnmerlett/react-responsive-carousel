@@ -39,7 +39,7 @@ export interface CarouselProps {
         rightArrow: string;
         item: string;
     };
-    onClickItem: (index: number, item: React.ReactNode) => void;
+    onClickItem: (index: number, item: React.ReactNode) => boolean | void;
     onClickThumb: (index: number, item: React.ReactNode) => void;
     onChange: (index: number, item: React.ReactNode) => void;
     onSwipeStart: (event: React.TouchEvent) => void;
@@ -50,7 +50,7 @@ export interface CarouselProps {
             x: number;
             y: number;
         }
-    ) => boolean | void;
+    ) => { x: number; y: number } | boolean | void;
     onSwiped: (direction: 'forward' | 'backwards') => boolean | void;
     preventMovementUntilSwipeScrollTolerance: boolean;
     renderArrowPrev: (clickHandler: () => void, hasPrev: boolean, label: string) => React.ReactNode;

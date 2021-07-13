@@ -406,12 +406,10 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
             return;
         }
 
-        this.props.onClickItem(index, item);
+        const allowAction = this.props.onClickItem(index, item);
 
-        if (index !== this.state.selectedItem) {
-            this.setState({
-                selectedItem: index,
-            });
+        if (index !== this.state.selectedItem && allowAction !== false) {
+            this.moveTo(index);
         }
     };
 
@@ -460,6 +458,8 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         if (propFuncRtnValue === false) {
             return false;
         }
+
+        delta = propFuncRtnValue === true || propFuncRtnValue === undefined ? delta : propFuncRtnValue;
 
         const animationHandlerResponse = this.props.swipeAnimationHandler(
             delta,
@@ -536,8 +536,8 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
     };
 
     onSwipeForward = () => {
-        const allowSwipe = this.props.onSwiped('forward');
-        if (allowSwipe === false) return;
+        const allowAction = this.props.onSwiped('forward');
+        if (allowAction === false) return;
 
         this.increment(1);
 
@@ -547,8 +547,8 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
     };
 
     onSwipeBackwards = () => {
-        const allowSwipe = this.props.onSwiped('backwards');
-        if (allowSwipe === false) return;
+        const allowAction = this.props.onSwiped('backwards');
+        if (allowAction === false) return;
 
         this.decrement(1);
 
