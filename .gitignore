@@ -1,7 +1,9 @@
 *
 
 !lib
+!lib/*
 !.gitignore
+!.npmignore
 !babel.config.json
 !CHANGELOG.md
 !CODE_OF_CONDUCT.md
