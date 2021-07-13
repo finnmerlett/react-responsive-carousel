@@ -1,0 +1,14 @@
+*
+
+!lib
+!.gitignore
+!babel.config.json
+!CHANGELOG.md
+!CODE_OF_CONDUCT.md
+!CONTRIBUTING.md
+!LICENSE.md
+!package.json
+!README.md
+!TROUBLESHOOTING.md
+!tsconfig.json
+!tsconfig.types.json

@@ -14,7 +14,7 @@ export declare const slideAnimationHandler: AnimationHandler;
  */
 export declare const slideSwipeAnimationHandler: SwipeAnimationHandler;
 /**
- * Default 'sliding' style animination handler for when a swipe action stops.
+ * Default 'sliding' style animation handler for when a swipe action stops.
  * @param props
  * @param state
  */

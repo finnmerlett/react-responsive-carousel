@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 export interface AnimationHandlerResponse {
     itemListStyle?: React.CSSProperties;
     slideStyle?: React.CSSProperties;
@@ -29,7 +29,7 @@ export interface CarouselProps {
         rightArrow: string;
         item: string;
     };
-    onClickItem: (index: number, item: React.ReactNode) => void;
+    onClickItem: (index: number, item: React.ReactNode) => boolean | void;
     onClickThumb: (index: number, item: React.ReactNode) => void;
     onChange: (index: number, item: React.ReactNode) => void;
     onSwipeStart: (event: React.TouchEvent) => void;
@@ -37,7 +37,10 @@ export interface CarouselProps {
     onSwipeMove: (event: React.TouchEvent | React.MouseEvent, delta: {
         x: number;
         y: number;
-    }) => boolean | void;
+    }) => {
+        x: number;
+        y: number;
+    } | boolean | void;
     onSwiped: (direction: 'forward' | 'backwards') => boolean | void;
     preventMovementUntilSwipeScrollTolerance: boolean;
     renderArrowPrev: (clickHandler: () => void, hasPrev: boolean, label: string) => React.ReactNode;
