@@ -639,6 +639,9 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         if (this.props.selectedItem === lastPosition) {
             sideStyle = { right: `${sideSize}%`, left: `-${sideSize}%` };
         }
+        if (Children.count(this.props.children) === 1) {
+            sideStyle = { left: `${sideSize}%`, right: `${sideSize}%` };
+        }
         return {
             left: '0%',
             right: '0%',
@@ -662,7 +665,11 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                 {};
 
             if (this.props.centerMode && this.props.axis === 'horizontal') {
-                style = { ...style, minWidth: this.props.centerSlidePercentage + '%' };
+                style = {
+                    ...style,
+                    minWidth: this.props.centerSlidePercentage + '%',
+                    width: this.props.centerSlidePercentage + '%',
+                };
             }
 
             const slideProps = {
@@ -739,7 +746,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
             return null;
         }
 
-        const isSwipeable = this.props.swipeable && Children.count(this.props.children) > 1;
+        const isSwipeable = this.props.swipeable && Children.count(this.props.children) > 0;
 
         const isHorizontal = this.props.axis === 'horizontal';
 
