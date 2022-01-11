@@ -26,6 +26,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
     static displayName = 'Carousel';
 
     static defaultProps: CarouselProps = {
+        ariaLabel: undefined,
         axis: 'horizontal',
         centerSlidePercentage: 80,
         interval: 3000,
@@ -437,7 +438,6 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
             swiping: true,
         });
         this.props.onSwipeStart(event);
-        this.clearAutoPlay();
     };
 
     onSwipeEnd = (event: React.TouchEvent) => {
@@ -447,6 +447,8 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
             swipeMovementStarted: false,
         });
         this.props.onSwipeEnd(event);
+
+        this.clearAutoPlay();
 
         if (this.state.autoPlay) {
             this.autoPlay();
@@ -672,6 +674,10 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
                 };
             }
 
+            if (this.state.swiping && this.state.swipeMovementStarted) {
+                style = { ...style, pointerEvents: 'none' };
+            }
+
             const slideProps = {
                 ref: (e: HTMLLIElement) => this.setItemsRef(e, index),
                 key: 'itemKey' + index + (isClone ? 'clone' : ''),
@@ -796,6 +802,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         }
         return (
             <div
+                aria-label={this.props.ariaLabel}
                 className={klass.ROOT(this.props.className)}
                 ref={this.setCarouselWrapperRef}
                 tabIndex={this.props.useKeyboardArrows ? 0 : undefined}
