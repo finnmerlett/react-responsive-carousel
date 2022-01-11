@@ -637,10 +637,10 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         let sideStyle: React.CSSProperties = {};
         const sideSize = (100 - this.props.centerSlidePercentage) / 2;
 
-        if (this.props.selectedItem === 0) {
+        if (this.state.selectedItem === 0) {
             sideStyle = { left: `${sideSize}%`, right: `-${sideSize}%` };
         }
-        if (this.props.selectedItem === lastPosition) {
+        if (this.state.selectedItem === lastPosition) {
             sideStyle = { right: `${sideSize}%`, left: `-${sideSize}%` };
         }
         if (Children.count(this.props.children) === 1) {
