@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
-import Carousel, { Props } from '../src/components/Carousel';
+import Carousel, { CarouselProps as Props } from '../src/components/Carousel';
 
 // carousel styles
 import '../src/main.scss';

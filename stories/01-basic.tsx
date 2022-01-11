@@ -18,23 +18,23 @@ const createCarouselItemImage = (index, options = {}) => (
 
 const baseChildren = <div>{[1, 2, 3, 4, 5].map(createCarouselItemImage)}</div>;
 
-const tooglesGroupId = 'Toggles';
+const togglesGroupId = 'Toggles';
 const valuesGroupId = 'Values';
 const mainGroupId = 'Main';
 
 const getConfigurableProps = () => ({
-    showArrows: boolean('showArrows', true, tooglesGroupId),
-    showStatus: boolean('showStatus', true, tooglesGroupId),
-    showIndicators: boolean('showIndicators', true, tooglesGroupId),
-    infiniteLoop: boolean('infiniteLoop', true, tooglesGroupId),
-    showThumbs: boolean('showThumbs', true, tooglesGroupId),
-    useKeyboardArrows: boolean('useKeyboardArrows', true, tooglesGroupId),
-    autoPlay: boolean('autoPlay', true, tooglesGroupId),
-    stopOnHover: boolean('stopOnHover', true, tooglesGroupId),
-    swipeable: boolean('swipeable', true, tooglesGroupId),
-    dynamicHeight: boolean('dynamicHeight', true, tooglesGroupId),
-    emulateTouch: boolean('emulateTouch', true, tooglesGroupId),
-    autoFocus: boolean('autoFocus', false, tooglesGroupId),
+    showArrows: boolean('showArrows', true, togglesGroupId),
+    showStatus: boolean('showStatus', true, togglesGroupId),
+    showIndicators: boolean('showIndicators', true, togglesGroupId),
+    infiniteLoop: boolean('infiniteLoop', true, togglesGroupId),
+    showThumbs: boolean('showThumbs', true, togglesGroupId),
+    useKeyboardArrows: boolean('useKeyboardArrows', true, togglesGroupId),
+    autoPlay: boolean('autoPlay', true, togglesGroupId),
+    stopOnHover: boolean('stopOnHover', true, togglesGroupId),
+    swipeable: boolean('swipeable', true, togglesGroupId),
+    dynamicHeight: boolean('dynamicHeight', true, togglesGroupId),
+    emulateTouch: boolean('emulateTouch', true, togglesGroupId),
+    autoFocus: boolean('autoFocus', false, togglesGroupId),
     thumbWidth: number('thumbWidth', 100, {}, valuesGroupId),
     selectedItem: number('selectedItem', 0, {}, valuesGroupId),
     interval: number('interval', 2000, {}, valuesGroupId),

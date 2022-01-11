@@ -14,6 +14,8 @@ import {
     fadeAnimationHandler,
 } from './animations';
 
+export { CarouselProps };
+
 export default class Carousel extends React.Component<CarouselProps, CarouselState> {
     private thumbsRef?: Thumbs;
     private carouselWrapperRef?: HTMLDivElement;
@@ -40,7 +42,7 @@ export default class Carousel extends React.Component<CarouselProps, CarouselSta
         onChange: noop,
         onSwipeStart: () => {},
         onSwipeEnd: () => {},
-        onSwipeMove: () => {},
+        onSwipeMove: () => undefined,
         onSwiped: () => {},
         preventMovementUntilSwipeScrollTolerance: false,
         renderArrowPrev: (onClickHandler: () => void, hasPrev: boolean, label: string) => (

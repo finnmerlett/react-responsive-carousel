@@ -51,7 +51,7 @@ export interface CarouselProps {
             x: number;
             y: number;
         }
-    ) => { x: number; y: number } | boolean | void;
+    ) => { x: number; y: number } | boolean | undefined;
     onSwiped: (direction: 'forward' | 'backwards') => boolean | void;
     preventMovementUntilSwipeScrollTolerance: boolean;
     renderArrowPrev: (clickHandler: () => void, hasPrev: boolean, label: string) => React.ReactNode;

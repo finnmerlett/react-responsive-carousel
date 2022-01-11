@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "target": "es5",
+        "jsx": "react",
+        "baseUrl": "..",
+        "typeRoots": ["../node_modules/@types", "../types"],
+        "paths": {
+            "~*": ["../*"],
+            "react-easy-swipe": ["../types/react-easy-swipe.d.ts"]
+        }
+    },
+    "include": ["./**/*.ts", "./**/*.tsx"]
+}
